@@ -3,14 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fortune Wheel | App Sorteos</title>
+  <title>Fortune Wheel | AppSorteos</title>
+  <link rel="stylesheet" href="../styles/style.css" type="text/css"/>
 </head>
 <body>
-  <div id="app">
-    {{ message }}
-  </div>
+  <main id="app">
+    <div class="wheel-container">
+      <div class="logo-container">
+        <img class="logo" draggable="false" src="../assets/logomc.png" alt="logomc">
+      </div>
+      <h1>¡McFortune Wheel! </h1>
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <div class="power_controls">
+              <br />
+              <table class="power" cellpadding="10" cellspacing="0">
+              </table>
+              <br />
+              <img class="spin-image" src="../assets/wheel-back.png" draggable="false" alt="Spin" onClick="startSpin();" />
+            </div>
+          </td>
+          <td width="438" height="582" class="the_wheel" v>
+            <canvas id="canvas" width="434" height="434">
+              <p>Sorry, your browser doesn't support canvas. Please try another.</p>
+            </canvas>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-  <script src="/scripts/app.js"></script>
+  <script src="../../Winwheel.js"></script>
+  <script src="../scripts/app.js"></script>
+  <script>
+    var theWheel = new Winwheel({
+      'numSegments': 8,
+      'strokeStyle': null,
+      'outerRadius': 212,
+      'textFontSize': 28,
+      'segments':
+        [
+          { 'fillStyle': '#FFC72C', 'text': 'Prize 1', 'textFillStyle': '#bf1f27', 'strokeStyle' : '#ffe677' },
+          { 'fillStyle': '#bf1f27', 'text': 'Prize 2', 'textFillStyle': '#ffe677', 'strokeStyle' : '#ffe677' },
+          { 'fillStyle': '#FFC72C', 'text': 'Prize 3', 'textFillStyle': '#bf1f27', 'strokeStyle' : '#ffe677' },
+          { 'fillStyle': '#bf1f27', 'text': 'Prize 4', 'textFillStyle': '#ffe677', 'strokeStyle' : '#ffe677' },
+          { 'fillStyle': '#FFC72C', 'text': 'Prize 5', 'textFillStyle': '#bf1f27', 'strokeStyle' : '#ffe677' },
+          { 'fillStyle': '#bf1f27', 'text': 'Prize 6', 'textFillStyle': '#ffe677', 'strokeStyle' : '#ffe677' },
+          { 'fillStyle': '#FFC72C', 'text': 'Prize 7', 'textFillStyle': '#bf1f27', 'strokeStyle' : '#ffe677' },
+          { 'fillStyle': '#bf1f27', 'text': 'Prize 8', 'textFillStyle': '#ffe677', 'strokeStyle' : '#ffe677' },
+        ],
+      'animation':
+      {
+        'type': 'spinToStop',
+        'duration': 5,
+        'spins': 8,
+        'callbackFinished': alertPrize
+      }
+    });
+  </script>
 </body>
 </html>

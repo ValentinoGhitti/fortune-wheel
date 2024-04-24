@@ -1,0 +1,32 @@
+body {
+  background-color: #f8ffe5;
+}
+
+.wheel-container {
+  position: relative;
+}
+
+#canvas, .spin-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #ffe677;
+  object-fit: cover;
+  background-color: #bf1f27;
+  padding: 10px;
+}
