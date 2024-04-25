@@ -13,12 +13,16 @@ body {
   transform: translate(-50%, -50%);
 }
 
+#canvas {
+  z-index: 50;
+}
+
 .logo-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 100;
 }
 
 .logo {
@@ -29,4 +33,11 @@ body {
   object-fit: cover;
   background-color: #bf1f27;
   padding: 10px;
+  cursor: pointer;
+
+}
+
+.segment-inputs {
+  display: flex;
+  flex-flow: column;
 }

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fortune Wheel | AppSorteos</title>
   <link rel="stylesheet" href="../styles/style.css" type="text/css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
 </head>
 <body>
   <main id="app">
@@ -13,12 +15,22 @@
         <img class="logo" draggable="false" src="../assets/logomc.png" alt="logomc">
       </div>
       <h1>¡McFortune Wheel! </h1>
-      <table cellpadding="0" cellspacing="0">
+      <table>
         <tr>
           <td>
             <div class="power_controls">
               <br />
-              <table class="power" cellpadding="10" cellspacing="0">
+              <table>
+                <div class="segment-inputs">
+                  <input type="text" v-model="segments[0].text">
+                  <input type="text" v-model="segments[1].text">
+                  <input type="text" v-model="segments[2].text">
+                  <input type="text" v-model="segments[3].text">
+                  <input type="text" v-model="segments[4].text">
+                  <input type="text" v-model="segments[5].text">
+                </div>
+                <button @click="girar">Play</button>
+
               </table>
               <br />
               <img class="spin-image" src="../assets/wheel-back.png" draggable="false" alt="Spin" onClick="startSpin();" />
@@ -32,36 +44,13 @@
         </tr>
       </table>
     </div>
+    <div id="premio-ganador">
+      El premio ganador es: {{ premioSeleccionado }}
+    </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="../../Winwheel.js"></script>
   <script src="../scripts/app.js"></script>
-  <script>
-    var theWheel = new Winwheel({
-      'numSegments': 8,
-      'strokeStyle': null,
-      'outerRadius': 212,
-      'textFontSize': 28,
-      'segments':
-        [
-          { 'fillStyle': '#FFC72C', 'text': 'Prize 1', 'textFillStyle': '#bf1f27', 'strokeStyle' : '#ffe677' },
-          { 'fillStyle': '#bf1f27', 'text': 'Prize 2', 'textFillStyle': '#ffe677', 'strokeStyle' : '#ffe677' },
-          { 'fillStyle': '#FFC72C', 'text': 'Prize 3', 'textFillStyle': '#bf1f27', 'strokeStyle' : '#ffe677' },
-          { 'fillStyle': '#bf1f27', 'text': 'Prize 4', 'textFillStyle': '#ffe677', 'strokeStyle' : '#ffe677' },
-          { 'fillStyle': '#FFC72C', 'text': 'Prize 5', 'textFillStyle': '#bf1f27', 'strokeStyle' : '#ffe677' },
-          { 'fillStyle': '#bf1f27', 'text': 'Prize 6', 'textFillStyle': '#ffe677', 'strokeStyle' : '#ffe677' },
-          { 'fillStyle': '#FFC72C', 'text': 'Prize 7', 'textFillStyle': '#bf1f27', 'strokeStyle' : '#ffe677' },
-          { 'fillStyle': '#bf1f27', 'text': 'Prize 8', 'textFillStyle': '#ffe677', 'strokeStyle' : '#ffe677' },
-        ],
-      'animation':
-      {
-        'type': 'spinToStop',
-        'duration': 5,
-        'spins': 8,
-        'callbackFinished': alertPrize
-      }
-    });
-  </script>
 </body>
 </html>
