@@ -1,73 +1,81 @@
-Vue.config.devtools = true
 new Vue({
   el: '#app',
   data() {
     return {
-        theWheel: {},
-        segments: [
-          { fillStyle: '#FFC72C', text: '', textFillStyle: '#bf1f27', strokeStyle: '#ffe677' },
-          { fillStyle: '#bf1f27', text: '', textFillStyle: '#ffe677', strokeStyle: '#ffe677' },
-          { fillStyle: '#FFC72C', text: '', textFillStyle: '#bf1f27', strokeStyle: '#ffe677' },
-          { fillStyle: '#bf1f27', text: '', textFillStyle: '#ffe677', strokeStyle: '#ffe677' },
-          { fillStyle: '#FFC72C', text: '', textFillStyle: '#bf1f27', strokeStyle: '#ffe677' },
-          { fillStyle: '#bf1f27', text: '', textFillStyle: '#ffe677', strokeStyle: '#ffe677' },
-        ],
-        nuevoPrizeText: '',
-        colorIndex: 0,
-        premioSeleccionado: '',
-        wheelSpinning: false
+      theWheel: {},
+      selectedPrize: '',
+      wheelSpinning: false,
+      options: ''
     };
   },
+  
+  computed: {
+    segments() {
+      return this.options.split('\n').map((text, i) => {
+        const truncatedText = text.length > 10 ? text.slice(0, 8) + '...' : text;
+        const key = i % 2 === 0 ? 'even' : 'odd';
+        const style = {
+          even: {
+            fillStyle: '#FFC72C', 
+            textFillStyle: '#bf1f27', 
+          },
+          odd: {
+            fillStyle: '#bf1f27', 
+            textFillStyle: '#FFC72C', 
+          }
+        };
+
+        return {
+          ...style[key],
+          text: truncatedText,
+          strokeStyle: '#ffe677'
+        };
+      });
+    }
+  },
+
   methods: {
-    agregarPrize() {
-      for (let i = 0; i < 6; i++) {
-        const text = this.segments[i].text.trim();
-        if (text !== '') {
-          const color = this.fillStyles[i % this.fillStyles.length];
-          this.segments[i].fillStyle = color;
-          this.segments[i].textFillStyle = this.textFillStyles[this.colorIndex % this.textFillStyles.length];
-          this.segments[i].strokeStyle = this.strokeStyle;
-          this.colorIndex++;
-        }
-      }
-      this.actualizarRuleta();
-    },
-    girar() {
+    spin() {
       if (this.theWheel) {
         this.theWheel.startAnimation();
         this.wheelSpinning = true;
       }
     },
-    mostrarPremioGanador(indicatedSegment) {
-      this.premioSeleccionado = indicatedSegment.text;
-      alert("Has ganado: " + indicatedSegment.text);
+
+    showWinnerPrize(e) {
+      let audio = new Audio('../assets/victory-sound.mp3');
+      audio.volume = 0.1;
+      audio.play();
+      this.selectedPrize = e.text;
     },
-    actualizarRuleta() {
+
+    initializeWheel() {
       this.theWheel = new Winwheel({
-        'numSegments': this.segments.length,
-        'strokeStyle': null,
-        'outerRadius': 212,
-        'textFontSize': 22,
-        'segments': this.segments,
-        'animation': {
-          'type': 'spinToStop',
-          'duration': 5,
-          'spins': 8,
-          'callbackFinished': this.mostrarPremioGanador
+        numSegments: this.segments.length,
+        strokeStyle: null,
+        outerRadius: 190,
+        textFontSize: 22,
+        segments: this.segments,
+        animation: {
+          type: 'spinToStop',
+          duration: 5,
+          spins: 8,
+          callbackFinished: this.showWinnerPrize
         },
-        'canvasId': 'canvas'  
+        canvasId: 'canvas',
       });
     },
   },
+
   watch: {
     segments: {
       handler() {
-        this.actualizarRuleta();
+        this.initializeWheel();
       },
-      deep: true
     }
   },
+
   mounted() {
-    this.actualizarRuleta();
+    this.initializeWheel();
   }
 });

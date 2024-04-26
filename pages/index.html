@@ -5,51 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fortune Wheel | AppSorteos</title>
   <link rel="stylesheet" href="../styles/style.css" type="text/css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-
+  <link rel="icon" href="../assets/logoico.ico" type="image/x-icon">
 </head>
 <body>
   <main id="app">
-    <div class="wheel-container">
-      <div class="logo-container">
-        <img class="logo" draggable="false" src="../assets/logomc.png" alt="logomc">
+    <div class="row top-bar">
+      <h3>Challenge Fortune Wheel / AppSorteos</h3>
+      <div v-if="selectedPrize">
+        <h3>The winner is: {{ selectedPrize }}</h3>
       </div>
-      <h1>¡McFortune Wheel! </h1>
-      <table>
-        <tr>
-          <td>
-            <div class="power_controls">
-              <br />
-              <table>
-                <div class="segment-inputs">
-                  <input type="text" v-model="segments[0].text">
-                  <input type="text" v-model="segments[1].text">
-                  <input type="text" v-model="segments[2].text">
-                  <input type="text" v-model="segments[3].text">
-                  <input type="text" v-model="segments[4].text">
-                  <input type="text" v-model="segments[5].text">
-                </div>
-                <button @click="girar">Play</button>
-
-              </table>
-              <br />
-              <img class="spin-image" src="../assets/wheel-back.png" draggable="false" alt="Spin" onClick="startSpin();" />
-            </div>
-          </td>
-          <td width="438" height="582" class="the_wheel" v>
-            <canvas id="canvas" width="434" height="434">
-              <p>Sorry, your browser doesn't support canvas. Please try another.</p>
-            </canvas>
-          </td>
-        </tr>
-      </table>
     </div>
-    <div id="premio-ganador">
-      El premio ganador es: {{ premioSeleccionado }}
+    <div class="row">
+      <div class="col">
+        <div class="wheel-container">
+          <div class="logo-container">
+            <img class="logo" draggable="false" src="../assets/logomc.png" alt="logomc">
+          </div>
+          <canvas id="canvas" width="400" height="400">
+            <p>Sorry, your browser doesn't support canvas. Please try another.</p>
+          </canvas>
+          <img class="arrow" src="../assets/down-arrow-svgrepo-com.svg" alt="arrow">
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="thumbnail">
+            <img src="../assets/background.jpg" draggable="false" />
+          </div>
+          <div class="options-box-container">
+            <textarea class="options-box" v-model="options"></textarea>
+          </div>
+          <div class="play-button-container">
+            <button @click="spin" class="btn">PLAY</button>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
-
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
   <script src="../../Winwheel.js"></script>
   <script src="../scripts/app.js"></script>
 </body>

@@ -1,22 +1,57 @@
+/* Reset */
 body {
-  background-color: #f8ffe5;
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
+/* App */
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Grid */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 2;
+}
+
+/* Wheel */
 .wheel-container {
+  display: flex;
   position: relative;
 }
 
-#canvas, .spin-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 #canvas {
+  filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.2));
   z-index: 50;
 }
 
+.arrow {
+  position: absolute;
+  width: 24px;
+  left: 50%;
+  z-index: 100;
+  transform: translateX(-50%);
+}
+
+/* Logo */
 .logo-container {
   position: absolute;
   top: 50%;
@@ -30,14 +65,92 @@ body {
   height: 50px;
   border-radius: 50%;
   border: 5px solid #ffe677;
-  object-fit: cover;
   background-color: #bf1f27;
   padding: 10px;
   cursor: pointer;
-
 }
 
-.segment-inputs {
+/* Box Text */
+.options-box {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.options-box-container {
   display: flex;
-  flex-flow: column;
+  width: 100%;
+  flex-grow: 1;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+/* NavBar */
+.top-bar {
+  height: 60px;
+  background-color: #bf1f27;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  color: white;
+}
+
+/* Card */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+  height: 400px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 25px 3px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.card .thumbnail {
+  width: 100%;
+  height: 110px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: hidden;
+}
+
+.card .thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .btn {
+  box-sizing: border-box;
+  display: flex;
+  padding: 14px 40px;
+  justify-content: center;
+  width: 100%;
+  color: #000000;
+  background-color: #fccc00;
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 5px;
+  text-decoration: none;
+  letter-spacing: 5px;
+  border: 2px solid #fccc00;
+  transition: all 0.3s;
+}
+
+.card .btn:hover {
+  background-color: #d3ab00;
+  border: 2px solid #d3ab00;
+}
+
+.play-button-container {
+  display: flex;
+  width: 100%;
+  padding: 0 12px 12px;
+  box-sizing: border-box;
 }
